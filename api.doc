@@ -1,0 +1,115 @@
+apikey : AIzaSyDIupkWOq9tuInCkuaNR7uMAiYb3QsXcb8
+
+#!/bin/bash
+
+API_KEY="YOUR_API_KEY"
+
+curl \
+  -X POST https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY} \
+  -H 'Content-Type: application/json' \
+  -d @<(echo '{
+  "contents": [
+    {
+      "parts": [
+        {
+          "text": "give some points on coding?\n 1. **Start with the basics:** Before jumping into more complex coding concepts, it'\''s important to have a solid understanding of the basics of programming. This includes learning about data types, variables, operators, control flow, and functions.\n\n\n2. **Choose a programming language:** There are many different programming languages to choose from, each with its own strengths and weaknesses. For beginners, it'\''s often recommended to start with a language that is easy to learn and has a large community of users, such as Python or JavaScript.\n\n\n3. **Learn by doing:** The best way to learn how to code is by practicing. Try writing simple programs and experimenting with different concepts. There are many online tutorials and resources available to help you get started.\n\n\n4. **Use a debugger:** A debugger is a tool that allows you to step through your code line by line and inspect the values of variables. This can be very helpful for finding and fixing errors in your code.\n\n\n5. **Document your code:** It'\''s important to comment your code so that you and others can understand what it does and how it works. This will make it easier to maintain and update your code in the future.\n\n\n6. **Test your code:** Testing your code is an important part of the development process. This involves writing tests that verify that your code is working as expected. This can help you catch errors early and prevent them from causing problems in production.\n\n\n7. **Refactor your code:** As your code grows in size and complexity, it'\''s important to refactor it to make it more maintainable and easier to understand. This involves breaking your code into smaller, more manageable functions and modules, and removing any unnecessary complexity.\n\n\n8. **Stay up to date:** The world of programming is constantly changing, so it'\''s important to stay up to date on the latest trends and technologies. This can involve reading blogs and articles, attending conferences, and taking online courses.\n\n\n9. **Collaborate with others:** Working with other programmers can be a great way to learn and improve your skills. It can also be helpful to get feedback on your code and to learn from the experiences of others.\n\n\n10. **Never give up:** Learning how to code can be challenging, but it'\''s also very rewarding. With hard work and dedication, you can achieve anything you set your mind to."
+        }
+      ]
+    }
+  ],
+  "generationConfig": {
+    "temperature": 0.9,
+    "topK": 1,
+    "topP": 1,
+    "maxOutputTokens": 2048,
+    "stopSequences": []
+  },
+  "safetySettings": [
+    {
+      "category": "HARM_CATEGORY_HARASSMENT",
+      "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    },
+    {
+      "category": "HARM_CATEGORY_HATE_SPEECH",
+      "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    },
+    {
+      "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+      "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    },
+    {
+      "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+      "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    }
+  ]
+}')
+
+
+#!/bin/bash
+
+# Run this from the directory in which you saved your input images
+# This script was written to run on Debian Linux. It may require updates
+# to run on other platforms
+
+# Test that the first image is present
+if [ ! -f "image0.jpeg" ]; then
+  echo "Could not find images in the current directory." >&2
+  exit 1
+fi
+
+API_KEY="YOUR_API_KEY"
+
+curl \
+  -X POST https://generativelanguage.googleapis.com/v1beta/models/gemini-pro-vision:generateContent?key=${API_KEY} \
+  -H 'Content-Type: application/json' \
+  -d @<(echo '{
+  "contents": [
+    {
+      "parts": [
+        {
+          "text": "Describe what the people are doing in this image:\n"
+        },
+        {
+          "inlineData": {
+            "mimeType": "image/jpeg",
+            "data": "'$(base64 -w0 image0.jpeg)'"
+          }
+        }
+      ]
+    }
+  ],
+  "generationConfig": {
+    "temperature": 0.4,
+    "topK": 32,
+    "topP": 1,
+    "maxOutputTokens": 4096,
+    "stopSequences": []
+  },
+  "safetySettings": [
+    {
+      "category": "HARM_CATEGORY_HARASSMENT",
+      "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    },
+    {
+      "category": "HARM_CATEGORY_HATE_SPEECH",
+      "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    },
+    {
+      "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+      "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    },
+    {
+      "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+      "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+    }
+  ]
+}')
+
+
+"{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": " The plant is called Wrightia r…"
